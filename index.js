@@ -16,19 +16,6 @@ function showProducts(err, products) {
     })
 }
 
-
-function orderProduct(err, product) {
-    if (err) {
-        return callback(err);
-    }
-
-    console.log("Bienvenue. Voici les produits disponibles :");
-    products.forEach((product) => {
-        var name = (`${product.name}, de ${product.author}`).padEnd(40);
-        console.log(`${product.id} - ${name} / ${product.EUR_price} / ${product.orders_count}`);
-    })
-}
-
 function getAllProducts(callback) {
     fs.readFile(productsFile, 'utf-8', (err, content) => {
         if (err) {
