@@ -2,7 +2,7 @@ let fs = require('fs');
 let readline = require('readline');
 let rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
 
-const productsFile = __dirname + '/products.json';
+const productsFile = __dirname + '/data/products.json';
 
 function showProducts(err, products) {
     if (err) {
