@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Product = require('../models/product')
 const ProductFS = require('../models/productFilesystem')
 
-mongoose.connect('mongodb://localhost:27017/workshopDatabase')
+mongoose.connect('mongodb://127.0.0.1:27017/workshopdatabase', {useNewUrlParser: true})
 
 // on success
 mongoose.connection.on('connected', function() {
@@ -13,9 +13,7 @@ mongoose.connection.on('connected', function() {
             if (err) {
                 console.log(err);
             } else {
-                console.log(Product.length);
-                // Product.find((err, res) => console.log(res));
-                //Product.insertMany(products);
+                Product.insertMany(products, function(err) { if (err) console.log(err) });
             }
         })
     } catch (err) {

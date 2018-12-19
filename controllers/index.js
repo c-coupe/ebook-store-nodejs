@@ -1,17 +1,17 @@
 var express = require('express')
   , router = express.Router()
-  , Product = require('../models/product')
+  , ProductsRepository = require('../repositories/products')
 
 
 router.get('/', (req, res) => {
-    Product.all((err, products) =>
+    ProductsRepository.all((err, products) =>
         res.render('pages/index.ejs', {products: products})
     )
 })
 
 router.post('/order', (req, res) => {
     try {
-        Product.order(req.body.id, (err, product) => {
+        ProductsRepository.order(req.body.id, (err, product) => {
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(product));
         })

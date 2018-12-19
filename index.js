@@ -71,7 +71,7 @@ function waitForOrder() {
         var found = line.match(re);
 
         if (null !== found) {
-            orderProductById(parseInt(found[1]));
+            orderProductById(found[1]);
         }
     });
 }

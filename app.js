@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 
 /* ===== BDD ===== */
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/database')
+mongoose.connect('mongodb://localhost:27017/workshopdatabase', {useNewUrlParser: true})
 
 // on success
 mongoose.connection.on('connected', function() {

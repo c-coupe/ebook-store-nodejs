@@ -33,7 +33,7 @@
                             <h2>[<%= products[i].id; %>] <%= products[i].name; %>, de <%= products[i].author; %></h2>
                             <p><%= products[i].description; %></p>
                             <p class="ordered">déjà commandés : <span><%= products[i].orders_count; %></span></p>
-                            <p><a class="btn btn-secondary" href="#" role="button" data-id="<%= products[i].id; %>">Acheter pour <%= products[i].EUR_price; %> € &raquo;</a></p>
+                            <p><a class="btn btn-secondary" href="#" role="button" data-id="<%= products[i]._id; %>">Acheter pour <%= products[i].EUR_price; %> € &raquo;</a></p>
                         </div>
                     <% } %>
                 </div>
@@ -43,7 +43,7 @@
         </main>
 
         <footer class="container">
-          <p>&copy; Workshop 2018-12</p>
+          <p>&copy; [ccoupe] Workshop Node.js - 2018-12</p>
         </footer>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
