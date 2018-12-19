@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
 const Product = require('../models/product')
+const OrdersRepository = require('../repositories/orders')
 
 exports.all = function (callback) {
     try {
@@ -14,12 +14,13 @@ exports.all = function (callback) {
     }
 }
 
-exports.order = function (id, callback) {
+exports.order = function (id, user, callback) {
     try {
         Product.findOneAndUpdate({_id: id}, {$inc: {orders_count: 1}}, {new: true}, (err, product) => {
             if (err) {
                 return callback(err);
             }
+            OrdersRepository.addOrder(product, user).then((result) => console.log(result))
             callback(null, product)
         })
     } catch (err) {

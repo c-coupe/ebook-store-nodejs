@@ -13,7 +13,7 @@ $( document ).ready(function() {
             $(that).parent().prev().find('span').text(json.orders_count);
         })
         .fail(function( xhr, status, errorThrown ) {
-            alert( "Sorry, there was a problem!" );
+            alert( "Sorry, there was a problem! " + xhr.responseText );
             console.log( "Error: " + errorThrown );
             console.log( "Status: " + status );
             console.dir( xhr );

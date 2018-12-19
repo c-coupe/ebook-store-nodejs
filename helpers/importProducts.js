@@ -14,10 +14,11 @@ mongoose.connection.on('connected', function() {
                 console.log(err);
             } else {
                 Product.insertMany(products, function(err) { if (err) console.log(err) });
+                console.log('Import successfully')
             }
         })
     } catch (err) {
-        console.log(err);
+        mongoose.disconnect();
     }
 })
 
@@ -25,5 +26,3 @@ mongoose.connection.on('connected', function() {
 mongoose.connection.on('error', function(err) {
     console.log('Mongoose default connection error: ' + err)
 })
-
-mongoose.disconnect();

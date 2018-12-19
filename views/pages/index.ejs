@@ -21,7 +21,7 @@
         <main role="main">
             <div class="jumbotron">
                 <div class="container">
-                    <h1 class="display-3">Bienvenue.</h1>
+                    <h1 class="display-3">Bienvenue<% if ( 'undefined' != typeof user ) { %> <%= user.username %><% } %>.</h1>
                     <p>Voici les produits disponibles...</p>
                 </div>
             </div>
@@ -40,6 +40,26 @@
 
                 <hr>
             </div>
+            <% if ( 'undefined' == typeof user ) { %>
+                <div>
+                    <% if ( messages.length > 0 ) { %>
+                    <p><strong>FLASH!</strong> <%= messages %></p>
+                    <% } %>
+                    <form action="/login" method="post">
+                        <div>
+                            <label>Username:</label>
+                            <input type="text" name="username"/>
+                        </div>
+                        <div>
+                            <label>Password:</label>
+                            <input type="password" name="password"/>
+                        </div>
+                        <div>
+                            <input type="submit" value="Log In"/>
+                        </div>
+                    </form>
+                </div>
+            <% } %>
         </main>
 
         <footer class="container">
