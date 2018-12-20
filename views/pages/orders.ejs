@@ -18,16 +18,18 @@
                             <thead>
                                 <tr>
                                 <th>#</th>
-                                <th>Product Id</th>
-                                <th>Date</th>
-                                <th>Price</th>
+                                <th>Titre</th>
+                                <th>Auteur</th>
+                                <th>Date d'achat</th>
+                                <th>Prix</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <% for (var i = 0; i < orders.length; i++) { %>
                                 <tr>
                                     <td><%= orders[i]._id; %></td>
-                                    <td><%= orders[i].product_id; %></td>
+                                    <td><a href="/<%= orders[i].product_id.file_link; %>"><%= orders[i].product_id.name; %></a></td>
+                                    <td><%= orders[i].product_id.author; %></td>
                                     <td><%= orders[i].creation_date; %></td>
                                     <td><%= orders[i].EUR_price; %></td>
                                 </tr>

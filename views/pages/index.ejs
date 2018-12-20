@@ -14,6 +14,8 @@
                 </div>
             </div>
 
+            <% include ../partials/messages %>
+
             <div class="container">
                 <div class="row">
                     <% for (var i = 0; i < products.length; i++) { %>
@@ -28,28 +30,8 @@
 
                 <hr>
             </div>
-            <% if ( 'undefined' == typeof user ) { %>
-                <h4>Connexion :</h4>
-                <div>
-                    <% if ( messages.length > 0 ) { %>
-                    <p><strong>FLASH!</strong> <%= messages %></p>
-                    <% } %>
-                    <form action="/login" method="post">
-                        <div>
-                            <label>Username:</label>
-                            <input type="text" name="username"/>
-                        </div>
-                        <div>
-                            <label>Password:</label>
-                            <input type="password" name="password"/>
-                        </div>
-                        <div>
-                            <input type="submit" value="Log In"/>
-                        </div>
-                    </form>
-                </div>
-            <% } %>
         </main>
+        <% include ../partials/login %>
 
         <% include ../partials/footer %>
     </body>

@@ -8,6 +8,7 @@ const passport = require('passport')
   , MongoStore = require('connect-mongo')(session)
   , flash = require('connect-flash')
   , methodOverride = require('method-override')
+  , helmet = require("helmet")
 
 /* ===== BDD ===== */
 const mongoose = require('mongoose')
@@ -26,20 +27,37 @@ mongoose.connection.on('error', function(err) {
 /* ===== RESTIFY ===== */
 app.use(methodOverride())
 
+/* ===== Helmet ===== */
+app.use(helmet())
+
 /* ===== AUTH ===== */
 const User = require('./models/user')
 passport.use(new LocalStrategy(
     {passReqToCallback : true},
     function(req, username, password, done) {
-        User.findOne({ username: username }, function (err, user) {
-            if (err) { return done(err); }
-            if (!user) {
-                return done(null, false, { message: 'Incorrect username.' });
+        // attempt to authenticate user
+        User.getAuthenticated(username, password, function(err, user, reason) {
+            if (err) throw err;
+
+            // login was successful if we have a user
+            if (user) {
+                // handle login success
+                console.log('login success');
+                done(null, user);
             }
-            if (!user.validPassword(password)) {
-                return done(null, false, { message: 'Incorrect password.' });
+            var reasons = User.failedLogin;
+            switch (reason) {
+                case reasons.NOT_FOUND:
+                    console.log('login failed : NOT_FOUND');
+                    break;
+                case reasons.PASSWORD_INCORRECT:
+                    console.log('login failed : PASSWORD_INCORRECT');
+                    break;
+                case reasons.MAX_ATTEMPTS:
+                    console.log('login failed : MAX_ATTEMPTS');
+                    break;
             }
-            return done(null, user);
+            done(null, false, { message: "Invalid username/password" });
         });
     }
 ));
@@ -48,10 +66,8 @@ passport.serializeUser(function(user, done) {
     done(null, user._id);
 });
 
-passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-        done(err, user);
-    });
+passport.deserializeUser(function(userId, done) {
+    User.findById(userId, (err, user) => done(err, user));
 });
 
 app.use(session({

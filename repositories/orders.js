@@ -10,5 +10,5 @@ exports.addOrder = async function (product, user) {
 }
 
 exports.all = async function (user) {
-    return await Order.find({user_id: user._id})
+    return await Order.find({user_id: user._id}).populate('product_id')
 }

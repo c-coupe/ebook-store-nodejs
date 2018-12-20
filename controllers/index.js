@@ -1,6 +1,7 @@
 var express = require('express')
   , router = express.Router()
   , Product = require('../models/product')
+  , User = require('../models/user')
   , ProductsRepository = require('../repositories/products')
   , OrdersRepository = require('../repositories/orders')
   , passport = require('passport')
@@ -8,7 +9,9 @@ var express = require('express')
 
 /* ===== RESTIFY ===== */
 restify.serve(router, Product)
+restify.serve(router, User)
 
+/* ===== Custom routes ===== */
 router.get('/', (req, res) => {
     ProductsRepository.all((err, products) =>
         res.render('pages/index.ejs', {products: products, messages: req.flash('error'), user: req.user})
@@ -19,6 +22,7 @@ router.get('/orders', (req, res) => {
     if(! req.user) {
         return res.status(302).send('Must login first...');
     }
+    debugger;
     OrdersRepository.all(req.user)
         .then((orders) => {
             res.render('pages/orders.ejs', {orders: orders, user: req.user})
