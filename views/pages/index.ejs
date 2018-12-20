@@ -23,7 +23,11 @@
                             <h2>[<%= products[i].id; %>] <%= products[i].name; %>, de <%= products[i].author; %></h2>
                             <p><%= products[i].description; %></p>
                             <p class="ordered">déjà commandés : <span><%= products[i].orders_count; %></span></p>
-                            <p><a class="btn btn-secondary" href="#" role="button" data-id="<%= products[i]._id; %>">Acheter pour <%= products[i].EUR_price; %> € &raquo;</a></p>
+                            <p>
+                                <a class="btn btn-secondary buyProduct" href="#" role="button" data-id="<%= products[i]._id; %>" data-toggle="modal" data-target="#loginModal">
+                                    Acheter pour <%= products[i].EUR_price; %> € &raquo;
+                                </a>
+                            </p>
                         </div>
                     <% } %>
                 </div>

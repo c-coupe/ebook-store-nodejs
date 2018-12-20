@@ -1,5 +1,5 @@
 <% if ( 'undefined' == typeof user ) { %>
-<div class="modal" tabindex="-1" role="dialog">
+<div class="modal" tabindex="-1" role="dialog" id="loginModal" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form action="/login" method="post">
@@ -18,11 +18,13 @@
                         <label>Password:</label>
                         <input type="password" name="password"/>
                     </div>
+                    <div>
+                        <input type="submit" value="Log In" class="btn btn-primary"/>
+                    </div>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <input type="submit" value="Log In" class="btn btn-primary"/>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
     </div>

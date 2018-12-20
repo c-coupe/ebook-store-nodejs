@@ -43,7 +43,7 @@ passport.use(new LocalStrategy(
             if (user) {
                 // handle login success
                 console.log('login success');
-                done(null, user);
+                return done(null, user);
             }
             var reasons = User.failedLogin;
             switch (reason) {
