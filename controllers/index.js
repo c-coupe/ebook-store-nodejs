@@ -1,8 +1,13 @@
 var express = require('express')
   , router = express.Router()
+  , Product = require('../models/product')
   , ProductsRepository = require('../repositories/products')
   , OrdersRepository = require('../repositories/orders')
   , passport = require('passport')
+  , restify = require('express-restify-mongoose')
+
+/* ===== RESTIFY ===== */
+restify.serve(router, Product)
 
 router.get('/', (req, res) => {
     ProductsRepository.all((err, products) =>
@@ -19,7 +24,7 @@ router.get('/orders', (req, res) => {
             res.render('pages/orders.ejs', {orders: orders, user: req.user})
         }).catch((err) => {
             console.log(err);
-            res.status(400).send('Something broke!');
+            res.status(500).send('Something broke!');
         })
 })
 

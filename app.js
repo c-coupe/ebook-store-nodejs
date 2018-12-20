@@ -7,6 +7,7 @@ const passport = require('passport')
   , session = require("express-session")
   , MongoStore = require('connect-mongo')(session)
   , flash = require('connect-flash')
+  , methodOverride = require('method-override')
 
 /* ===== BDD ===== */
 const mongoose = require('mongoose')
@@ -21,6 +22,9 @@ mongoose.connection.on('connected', function() {
 mongoose.connection.on('error', function(err) {
     console.log('Mongoose default connection error: ' + err)
 })
+
+/* ===== RESTIFY ===== */
+app.use(methodOverride())
 
 /* ===== AUTH ===== */
 const User = require('./models/user')
