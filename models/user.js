@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const uniqueValidator = require("mongoose-unique-validator")
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcryptjs")
 const SALT_WORK_FACTOR = 10;
 
 var schema = new mongoose.Schema({
